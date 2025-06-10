@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WebviewActivity"
+    android:orientation="vertical"
+    android:layout_marginTop="40dp">
+
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="16sp"
+        >
+    </WebView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16sp">
+
+        <Button
+            android:id="@+id/baqarah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Surah Al-Baqarah"
+            />
+
+        <Button
+            android:id="@+id/imran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Surah Al-Imran"
+            android:layout_marginVertical="8sp"
+            />
+
+        <Button
+            android:id="@+id/rahman"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Surah Ar-Rahman"
+            />
+    </LinearLayout>
+
+</LinearLayout>
