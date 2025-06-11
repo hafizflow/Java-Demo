@@ -15,8 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button nextPage;
-    Button webView;
+    Button nextPage, webView, animationPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webView);
         webView.setOnClickListener(view -> {
             Intent intent = new Intent(this, WebviewActivity.class);
+            startActivity(intent);
+        });
+
+        animationPage = findViewById(R.id.animationView);
+        animationPage.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AnimationActivity.class);
             startActivity(intent);
         });
 
