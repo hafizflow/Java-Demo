@@ -15,6 +15,9 @@
         android:theme="@style/Theme.JavaDemo"
         tools:targetApi="31">
         <activity
+            android:name=".InternetImage"
+            android:exported="false" />
+        <activity
             android:name=".AnimationActivity"
             android:exported="false" />
         <activity

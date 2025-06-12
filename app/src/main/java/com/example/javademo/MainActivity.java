@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button nextPage, webView, animationPage;
+    Button nextPage, webView, animationPage, loadImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +47,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        loadImageView = findViewById(R.id.loadImageView);
+        loadImageView.setOnClickListener(view -> {
+            Intent intent = new Intent(this, InternetImage.class);
+            startActivity(intent);
+        });
     }
 }

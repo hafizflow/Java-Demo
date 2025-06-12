@@ -49,6 +49,13 @@
                 android:text="Animation Page"
                 android:layout_marginTop="16dp"/>
 
+            <Button
+                android:id="@+id/loadImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Load Internet Image Page"
+                android:layout_marginTop="16dp"/>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
