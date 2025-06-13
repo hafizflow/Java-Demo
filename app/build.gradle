@@ -38,4 +38,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation libs.glide
     implementation libs.lottie
+    implementation libs.play.services.ads
 }

@@ -3,6 +3,7 @@ package com.example.javademo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.bumptech.glide.Glide;
 
 public class InternetImage extends AppCompatActivity {
@@ -42,7 +45,7 @@ public class InternetImage extends AppCompatActivity {
 
             animationView.setAnimation(R.raw.loading);
             animationView.playAnimation();
-            animationView.setRepeatCount(2);
+            animationView.setRepeatCount(LottieDrawable.INFINITE);
         });
 
 
