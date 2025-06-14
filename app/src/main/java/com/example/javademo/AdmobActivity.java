@@ -3,6 +3,7 @@ package com.example.javademo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.google.android.gms.ads.admanager.AdManagerAdView;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
@@ -27,6 +29,7 @@ public class AdmobActivity extends AppCompatActivity {
     private Button admob;
     private static final String TAG = "AdmobActivity";
     private InterstitialAd interstitialAd;
+    LinearLayout adLayout;
     AdView adView;
 
     @Override
@@ -44,7 +47,7 @@ public class AdmobActivity extends AppCompatActivity {
 
         // Initialize button
         admob = findViewById(R.id.admob);
-        adView = findViewById(R.id.banner_ad_view);
+        adLayout = findViewById(R.id.banner_view);
 
         new Thread(
                 () -> {
@@ -53,24 +56,14 @@ public class AdmobActivity extends AppCompatActivity {
                 })
                 .start();
 
-        // Banner Ad
-        AdManagerAdRequest adRequest = new AdManagerAdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        loadBannerAd();
 
 
         // Full Screen Ad
         loadInterstitialAd();
 
         // Set button click listener to show the ad
-        admob.setOnClickListener(view -> {
-            if (interstitialAd != null) {
-                interstitialAd.show(this);
-            } else {
-                Log.d(TAG, "The interstitial ad is not loaded yet.");
-                // Optionally reload the ad if it’s not available
-                loadInterstitialAd();
-            }
-        });
+        admob.setOnClickListener(view ->  onClick() );
     }
 
     public void loadInterstitialAd() {
@@ -137,5 +130,30 @@ public class AdmobActivity extends AppCompatActivity {
         super.onDestroy();
         // Clean up ad reference to prevent memory leaks
         interstitialAd = null;
+    }
+
+    private  void onClick() {
+        if (interstitialAd != null) {
+            interstitialAd.show(this);
+        } else {
+            Log.d(TAG, "The interstitial ad is not loaded yet.");
+            // Optionally reload the ad if it’s not available
+            loadInterstitialAd();
+        }
+    }
+
+    private void loadBannerAd() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId(getString(R.string.banner_ad));
+        // Request an anchored adaptive banner with a width of 360.
+        adView.setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360));
+
+        // Replace ad container with new ad view.
+        adLayout.removeAllViews();
+        adLayout.addView(adView);
+
+        AdManagerAdRequest adRequest = new AdManagerAdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 }
