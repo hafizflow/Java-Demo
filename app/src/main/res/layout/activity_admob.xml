@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,15 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".AdmobActivity"
     android:orientation="vertical"
-    android:gravity="center">
+    >
 
 
-    <Button
-        android:id="@+id/admob"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner_ad_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admob View"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad"
         android:layout_gravity="center"
         />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/banner_ad_view"
+        android:gravity="center">
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/admob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admob View"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

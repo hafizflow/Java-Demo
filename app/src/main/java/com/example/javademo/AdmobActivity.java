@@ -13,8 +13,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.admanager.AdManagerAdRequest;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
@@ -23,6 +27,7 @@ public class AdmobActivity extends AppCompatActivity {
     private Button admob;
     private static final String TAG = "AdmobActivity";
     private InterstitialAd interstitialAd;
+    AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,21 @@ public class AdmobActivity extends AppCompatActivity {
 
         // Initialize button
         admob = findViewById(R.id.admob);
+        adView = findViewById(R.id.banner_ad_view);
 
-        // Load interstitial ad
+        new Thread(
+                () -> {
+                    // Initialize the Google Mobile Ads SDK on a background thread.
+                    MobileAds.initialize(this, initializationStatus -> {});
+                })
+                .start();
+
+        // Banner Ad
+        AdManagerAdRequest adRequest = new AdManagerAdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+
+        // Full Screen Ad
         loadInterstitialAd();
 
         // Set button click listener to show the ad
@@ -55,7 +73,7 @@ public class AdmobActivity extends AppCompatActivity {
         });
     }
 
-    private void loadInterstitialAd() {
+    public void loadInterstitialAd() {
         // Use test ad unit ID for development: ca-app-pub-3940256099942544/1033173712
         String adUnitId = getString(R.string.ad_unit_id);
         InterstitialAd.load(this, adUnitId, new AdRequest.Builder().build(),
