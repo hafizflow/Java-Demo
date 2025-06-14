@@ -56,8 +56,9 @@ public class AdmobActivity extends AppCompatActivity {
                 })
                 .start();
 
-        loadBannerAd();
+//        loadBannerAd();
 
+        loadInlineBannerAd();
 
         // Full Screen Ad
         loadInterstitialAd();
@@ -155,5 +156,24 @@ public class AdmobActivity extends AppCompatActivity {
 
         AdManagerAdRequest adRequest = new AdManagerAdRequest.Builder().build();
         adView.loadAd(adRequest);
+    }
+
+    private void loadInlineBannerAd() {
+        // Step 1: Create an inline adaptive banner ad size using the activity context.
+        AdSize adSize = AdSize.getCurrentOrientationInlineAdaptiveBannerAdSize(this, 320);
+
+        // Step 2: Create banner using activity context and set the inline ad size and
+        // ad unit ID.
+        AdView bannerView = new AdView(this);
+        bannerView.setAdUnitId(getString(R.string.banner_ad));
+        bannerView.setAdSize(adSize);
+
+        adLayout.removeAllViews();
+        adLayout.addView(bannerView);
+
+        // Step 3: Load an ad.
+        AdRequest adRequest = new AdRequest.Builder().build();
+        bannerView.loadAd(adRequest);
+        // TODO: Insert banner view in list view or scroll view, etc.
     }
 }
